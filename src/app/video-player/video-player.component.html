@@ -1,0 +1,50 @@
+{{ratioPosition}}
+<div class = 'd-flex flex-column' style="width: fit-content;">
+  <div id = "player"></div>
+<!--  <app-play-tool-bar [dotPosition]="ratioPosition" ></app-play-tool-bar>-->
+
+  <div class="play-tool-bar">
+    <div class="video-progress-bar">
+      <div class = "circle" [ngStyle]="{'left': ratioPosition.toString() + '%'}">
+      <span class="material-icons" >
+        fiber_manual_record
+      </span>
+      </div>
+      <div class = "line">
+
+      </div>
+    </div>
+    <div class="toolBar">
+      <div class='playAndPause' (click)="player.pauseVideo()">
+
+    <span class="material-icons" >
+        pause
+    </span>
+        <span class="material-icons">
+        play_arrow
+      </span>
+      </div>
+      <div class='volume'>
+    <span class="material-icons">
+        volume_off
+    </span>
+        <span class="material-icons">
+      volume_up
+    </span>
+      </div>
+      <div class='timeStamp'>
+        0:12/3:23
+      </div>
+      <div class='settings ml-auto'>
+ <span class="material-icons">
+   settings
+</span>
+      </div>
+    </div>
+  </div>
+
+
+
+
+</div>
+
