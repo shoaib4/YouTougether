@@ -25,19 +25,15 @@ export class VideoPlayerComponent implements OnInit {
     //   console.log(this.player.getCurrentTime());
     //   setTimeout(this.getRatioPosition,200);
     // }
-    setInterval(function () {
+    setInterval(() => {
       // console.log(1)
       console.log(window['YT'].Player)
       console.log(this.player.getCurrentTime)
       if(this.player && this.player.getCurrentTime && this.player.getDuration){
-        console.log(this.player)
-        let currentTime = !this.player.getCurrentTime ? 0.0 : this.player.getCurrentTime();
-        let durationTime = !this.player.getDuration ? 1 : this.player.getDuration();
-        this.ratioPosition = currentTime/durationTime *100;
-        console.log("12222", this.player.getCurrentTime() ,this.player.getDuration() )
+        console.log(this.player.getCurrentTime() ,this.player.getDuration() )
+        this.ratioPosition = this.player.getDuration() > 0 ? (this.player.getCurrentTime() / this.player.getDuration() ) *100 : 0;
       }
-    },500)
-
+    },200)
   }
 
   init(){
@@ -69,15 +65,15 @@ export class VideoPlayerComponent implements OnInit {
         playsinline: 1
       },
       events: {
-        'onStateChange': this.onPlayerStateChange.bind(this),
-        'onError': this.onPlayerError.bind(this),
-        'onReady': this.onPlayerReady.bind(this),
+        'onStateChange': this.onPlayerStateChange,
+        'onError': this.onPlayerError,
+        'onReady': this.onPlayerReady,
       }
     })
     // this.player.addEventListener("onStateChange", this.getRatioPosition);
   }
 
-  onPlayerReady = function(event) {
+  onPlayerReady(event) {
     if (this.isRestricted) {
       event.target.mute();
       event.target.playVideo();
@@ -86,7 +82,7 @@ export class VideoPlayerComponent implements OnInit {
     }
   }
 
-  onPlayerStateChange = function(event) {
+  onPlayerStateChange(event) {
     console.log(event);
     console.log(this.player.getCurrentTime)
     switch(event.data){
@@ -123,7 +119,7 @@ export class VideoPlayerComponent implements OnInit {
     }
   }
 
-  stopVideo = function() {
+  stopVideo() {
     this.player.stopVideo();
   }
 
